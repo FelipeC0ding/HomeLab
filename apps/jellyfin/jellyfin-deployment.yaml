@@ -38,5 +38,5 @@ spec:
           hostPath:
             path: /home/philip/jellyfin/shows
         - name: movies
-            hostPath:
-              path: /home/philip/jellyfin/movies
+          hostPath:
+            path: /home/philip/jellyfin/movies
