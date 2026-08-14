@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/FelipeC0ding/HomeLab.git
-    targetRevision: HEAD
+    targetRevision: main
     path: apps/jellyfin
     directory:
       recurse: true
