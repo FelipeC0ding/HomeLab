@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media
+  labels:
+    app: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: lscr.io/linuxserver/sonarr:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/London"
+          ports:
+            - containerPort: 8989
+              name: http
+          volumeMounts:
+            - name: sonarr-config
+              mountPath: /config
+            - name: shows-storage
+              mountPath: /shows
+            - name: downloads-storage
+              mountPath: /downloads
+      volumes:
+        - name: sonarr-config
+          hostPath:
+            path: /home/philip/jellyfin/sonarr_config
+        - name: shows-storage
+          hostPath:
+            path: /home/philip/jellyfin/shows
+        - name: downloads-storage
+          hostPath:
+            path: /home/philip/jellyfin/downloads

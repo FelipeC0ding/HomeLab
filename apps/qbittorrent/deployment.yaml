@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: media
+  labels:
+    app: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+       app: qbittorrent
+    spec:
+      containers:
+      # VPN sidecar container
+        - name: gluetun
+          image: qmcgaw/gluetun:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: "mullvad"
+            - name: VPN_TYPE
+              value: "wireguard"
+            - name: WIREGUARD_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                name: gluetun-vpn
+                key: WIREGUARD_PRIVATE_KEY
+            - name: WIREGUARD_ADDRESSES
+              valueFrom:
+                configMapKeyRef:
+                  name: gluetun-config
+                  key: WIREGUARD_ADDRESSES
+            - name: SERVER_CITIES
+              valueFrom:
+                configMapKeyRef:
+                  name: gluetun-config
+                  key: SERVER_CITIES
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              valueFrom:
+                configMapKeyRef:
+                  name: gluetun-config
+                  key: FIREWALL_OUTBOUND_SUBNETS
+          ports:
+            - containerPort: 8080
+              name: webui
+            - containerPort: 6881
+              name: torrent-tcp
+            - containerPort: 6881
+              protocol: UDP
+              name: torrent-udp
+        - name: qbittorrent
+          image: lscr.io/linuxserver/qbittorrent:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/London"
+            - name: WEBUI_PORT
+              value: "8080"
+          volumeMounts:
+            - name: qbit-config
+              mountPath: /config
+            - name: media-downloads
+              mountPath: /downloads
+      volumes:
+        - name: qbit-config
+          hostPath:
+            path: /home/philip/jellyfin/qbittorrent_config
+        - name: media-downloads
+          hostPath:
+            path: /home/philip/jellyfin/downloads

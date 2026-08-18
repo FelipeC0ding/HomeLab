@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seer
+  namespace: media
+  labels:
+    app: seer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seer
+  template:
+    metadata:
+      labels:
+        app: seer
+    spec:
+      containers:
+        - name: seer
+          image: ghcr.io/seerr-team/seerr:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/London"
+          ports:
+            - containerPort: 5055
+              name: http
+          volumeMounts:
+            - name: seer-config
+              mountPath: /app/config
+      volumes:
+        - name: seer-config
+          hostPath:
+            path: /home/philip/jellyfin/seerr_config
