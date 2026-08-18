@@ -16,7 +16,6 @@ spec:
        app: qbittorrent
     spec:
       containers:
-      # VPN sidecar container
         - name: gluetun
           image: qmcgaw/gluetun:latest
           securityContext:
@@ -31,8 +30,8 @@ spec:
             - name: WIREGUARD_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                name: gluetun-vpn
-                key: WIREGUARD_PRIVATE_KEY
+                  name: gluetun-vpn
+                  key: WIREGUARD_PRIVATE_KEY
             - name: WIREGUARD_ADDRESSES
               valueFrom:
                 configMapKeyRef:
