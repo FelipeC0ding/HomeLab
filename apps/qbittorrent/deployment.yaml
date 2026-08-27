@@ -74,7 +74,7 @@ spec:
       volumes:
         - name: qbit-config
           hostPath:
-            path: /home/philip/jellyfin/qbittorrent_config
+            path: /home/philip/jellyfin/qbittorrent_config_k8s
         - name: media-downloads
           hostPath:
             path: /home/philip/jellyfin/downloads
