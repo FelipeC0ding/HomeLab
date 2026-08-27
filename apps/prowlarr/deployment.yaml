@@ -45,4 +45,4 @@ spec:
       volumes:
         - name: prowlarr-config
           hostPath:
-            path: /home/philip/jellyfin/prowlarr_config
+            path: /home/philip/jellyfin/prowlarr_config_k8s

@@ -8,6 +8,6 @@ spec:
     app: jellyfin
   ports:
     - protocol: TCP
-      port: 8096
-      targetPort: 8096
+      port: 8097
+      targetPort: 8097
 type: ClusterIP

@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: sonarr-config
           hostPath:
-            path: /home/philip/jellyfin/sonarr_config
+            path: /home/philip/jellyfin/sonarr_config_k8s
         - name: shows-storage
           hostPath:
             path: /home/philip/jellyfin/shows

@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: radarr-config
           hostPath:
-            path: /home/philip/jellyfin/radarr_config
+            path: /home/philip/jellyfin/radarr_config_k8s
         - name: movies-storage
           hostPath:
             path: /home/philip/jellyfin/movies

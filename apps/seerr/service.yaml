@@ -8,6 +8,6 @@ spec:
   selector:
     app: seer
   ports:
-    - port: 5055
-      targetPort: 5055
+    - port: 5056
+      targetPort: 5056
       name: http
