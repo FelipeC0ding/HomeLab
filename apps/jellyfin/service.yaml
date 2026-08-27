@@ -11,3 +11,5 @@ spec:
       port: 8097
       targetPort: 8097
 type: ClusterIP
+      port: 8096
+      targetPort: 8096
