@@ -1,0 +1,21 @@
+nextcloud:
+  nextcloud:
+    host: nextcloud.local
+
+  existingSecret:
+    enabled: True
+    secretName: next-cloud-admin
+    usernameKey: username
+    passowrdKey: password
+
+  internalDatabase:
+    enabled: True
+
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 50Gi
+
+  service:
+    type: ClusterIP
+    port: 8081
