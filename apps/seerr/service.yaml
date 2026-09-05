@@ -9,5 +9,5 @@ spec:
     app: seer
   ports:
     - port: 5056
-      targetPort: 5056
+      targetPort: 5055
       name: http
