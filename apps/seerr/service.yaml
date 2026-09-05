@@ -4,7 +4,7 @@ metadata:
   name: seer
   namespace: media
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: seer
   ports:

@@ -17,5 +17,5 @@ nextcloud:
     size: 50Gi
 
   service:
-    type: ClusterIP
+    type: LoadBalancer
     port: 8081
