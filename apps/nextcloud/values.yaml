@@ -4,7 +4,7 @@ nextcloud:
 
   existingSecret:
     enabled: True
-    secretName: next-cloud-admin
+    secretName: nextcloud-admin-secret
     usernameKey: username
     passowrdKey: password
 
@@ -18,4 +18,4 @@ nextcloud:
 
   service:
     type: LoadBalancer
-    port: 8081
+    port: 8080
