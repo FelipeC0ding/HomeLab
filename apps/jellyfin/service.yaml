@@ -4,12 +4,10 @@ metadata:
   name: jellyfin-svc
   namespace: media
 spec:
+  type: LoadBalancer
   selector:
     app: jellyfin
   ports:
     - protocol: TCP
-      port: 8097
-      targetPort: 8097
-type: LoadBalancer
       port: 8096
-      targetPort: 8096
+      targetport: 8096
