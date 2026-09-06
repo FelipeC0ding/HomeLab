@@ -72,7 +72,7 @@ spec:
                   name: nextcloud-admin-secret
                   key: nextcloud-password
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: "192.168.1.136 nextcloud.kube.home"
+              value: "192.168.1.136 100.77.143.83 nextcloud.kube.home"
             - name: NEXTCLOUD_DATA_DIR
               value: "/var/www/html/data"
             
