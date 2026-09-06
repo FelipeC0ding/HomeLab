@@ -3,5 +3,5 @@ name: Nextcloud
 version: 1.0.0
 dependencies:
   - name: nextcloud
-  - version: 6.2.1
-  - repositiory: https://nextcloud.github.io/helm/
+    version: 6.2.1
+    repositiory: https://nextcloud.github.io/helm/
