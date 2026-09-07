@@ -132,7 +132,9 @@ spec:
               subPath: themes
       volumes:
         - name: nextcloud-main
-          emptyDir: {}
+          hostPath:
+            path: /storage/nextcloud
+            type: DirectroyOrCreate
       securityContext:
         # Will mount configuration files as www-data (id: 33) for nextcloud
         fsGroup: 33
