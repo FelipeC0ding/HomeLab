@@ -89,7 +89,7 @@ spec:
               httpHeaders:
               - name: Host
                 value: "nextcloud.kube.home"
-            initialDelaySeconds: 10
+          initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
@@ -106,6 +106,17 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /status.php
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: "nextcloud.kube.home"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
           resources:
             {}
           volumeMounts:
