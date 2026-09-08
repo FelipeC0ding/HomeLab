@@ -134,7 +134,7 @@ spec:
         - name: nextcloud-main
           hostPath:
             path: /storage/nextcloud
-            type: DirectroyOrCreate
+            type: DirectoryOrCreate
       securityContext:
         # Will mount configuration files as www-data (id: 33) for nextcloud
         fsGroup: 33
