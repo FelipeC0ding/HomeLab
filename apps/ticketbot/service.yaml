@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticketbot-service
+  labels:
+    app: ticketbot
+spec:
+  selector:
+    app: ticketbot
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
