@@ -5,6 +5,7 @@ metadata:
   labels:
     app: ticketbot
 spec:
+  type: LoadBalancer
   selector:
     app: ticketbot
   ports:
