@@ -21,7 +21,7 @@ spec:
         command: ["python", "webapp.py"]
         ports:
         - containerPort: 8000
-    env:
+        env:
         - name: TELEGRAM_BOT_TOKEN
           valueFrom:
             secretKeyRef:
@@ -32,3 +32,4 @@ spec:
             secretKeyRef:
               name: twickets-telegram
               key: TELEGRAM_CHAT_ID
+
