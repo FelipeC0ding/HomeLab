@@ -16,7 +16,7 @@ spec:
       serviceAccountName: kubevirt-manager
       containers:
         - name: kubevirt-manager
-          image: quay.io/kubevirt-manager/kubevirt-manager:latest
+          image: quay.io/kubevirt-manager/kubevirt-manager:1.4.0
           ports:
             - containerPort: 8080
               name: http
