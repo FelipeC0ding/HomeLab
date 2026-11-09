@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackboard-sync
+  namespace: media
+  labels:
+    app: blackboard-sync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackboard-sync
+  template:
+    metadata:
+      labels:
+        app: blackboard-sync
+    spec:
+      serviceAccountName: blackboard-sync-sa
+      containers:
+        - name: blackboard-sync
+          image: localhost:5000/blackboard-sync:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: nextcloud-data
+              mountPath: /storage/nextcloud/data/admin/files/Blackboard
+      volumes:
+        - name: nextcloud-data
+          hostPath:
+            path: /storage/nextcloud/data/admin/files/Blackboard
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: blackboard-sync-sa
+  namespace: media
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: blackboard-sync-role
+  namespace: media
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec"]
+    verbs: ["get", "list", "create"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: blackboard-sync-rb
+  namespace: media
+subjects:
+  - kind: ServiceAccount
+    name: blackboard-sync-sa
+    namespace: media
+roleRef:
+  kind: Role
+  name: blackboard-sync-role
+  apiGroup: rbac.authorization.k8s.io

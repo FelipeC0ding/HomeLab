@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blackboard-sync-ingress
+  namespace: media
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: blackboard.homelab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: blackboard-sync-service
+            port:
+              number: 8080
